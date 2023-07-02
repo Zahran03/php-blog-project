@@ -2,21 +2,6 @@
 require "functions.php";
 session_start();
 
-if( isset($_POST["login"])){
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    $result = mysqli_query($conn, "SELECT * FROM pengguna WHERE username = '$username'");
-    if( mysqli_num_rows($result) === 1){
-        $row = mysqli_fetch_assoc($result);
-        if( password_verify($password, $row["password"])){
-            $_SESSION["login"] = true;
-            header("Location: index.php");
-            exit;
-        }
-    }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +26,7 @@ if( isset($_POST["login"])){
         <div class="wrapper">
             <h1>Login</h1>
             <div class="formInput">
-                <form action="" method="post">
+                <form action="index.php" method="post">
                     <label for="username">Username : </label>
                     <input type="text" name="username" id="username">
                     <label for="password">Password : </label>
