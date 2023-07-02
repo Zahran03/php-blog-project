@@ -18,7 +18,7 @@ $blogs = query("SELECT * FROM blogs");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?version=12345">
 </head>
 <body>
     <nav>
@@ -43,7 +43,12 @@ $blogs = query("SELECT * FROM blogs");
                 <div class="postTitle">
                     <a href="detail.php?id=<?= $blog["id"] ?>"><?= $blog["judul"]?></a>
                 </div>
-                <p><?= $blog["user_id"]?></p>
+                <?php if($userId === $blog["user_id"]) :?>
+                    <div class="deleteAndEdit">
+                        <a class="editButton" href="edit.php?user_id=<?= $blog["user_id"] ?>">Edit</a>
+                        <a class="deleteButton" href="delete.php">Delete</a>
+                    </div>
+                <?php endif; ?>
                 <div class="postDesc"><?= $blog["deskripsi"] ?></div>
             </section>
             <?php endforeach; ?>
