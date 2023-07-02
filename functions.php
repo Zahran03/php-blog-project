@@ -14,15 +14,16 @@ function query($query) {
     return $data;
 }
 
-function tambah($data){
+function tambah($data, $userid){
     global $conn;
 
     // ambil data user 
+    $userID = $userid;
     $judul = htmlspecialchars($data["judul"]);
     $gambar = htmlspecialchars($data["gambar"]);
     $deskripsi = htmlspecialchars($data["deskripsi"]);
 
-    mysqli_query($conn, "INSERT INTO blogs VALUES ('', '$gambar', '$judul', '$deskripsi')");
+    mysqli_query($conn, "INSERT INTO blogs VALUES ('',$userID, '$gambar', '$judul', '$deskripsi')");
 
     return mysqli_affected_rows($conn);
 }

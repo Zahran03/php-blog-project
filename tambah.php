@@ -1,18 +1,14 @@
 <?php 
 session_start();
+$user_id = $_GET["user_id"];
 require "functions.php";
 if( !isset($_SESSION["login"]) ){
     header("Location: login.php");
     exit;
 }
 if( isset( $_POST["create"])){
-    if( tambah($_POST) > 0){
-        echo "
-            <script>
-                alert('data berhasil ditambahkan');
-                document.location.href = 'index.php';
-            </script>
-        ";
+    if( tambah($_POST, $user_id) > 0){
+        header("Location: index.php?id=" . $user_id);
     } else {
         echo "
             <script>

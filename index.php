@@ -1,21 +1,12 @@
 <?php 
 session_start();
+
 require "functions.php";
-
-if( isset($_POST["login"])){
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    $result = mysqli_query($conn, "SELECT * FROM pengguna WHERE username = '$username'");
-    if( mysqli_num_rows($result) === 1){
-        $row = mysqli_fetch_assoc($result);
-        if( password_verify($password, $row["password"])){
-            $_SESSION["login"] = true;
-            header("Location: index.php");
-            exit;
-        }
-    }
-}
+$userId = $_GET["id"];
+if( !isset($_SESSION["login"]) ){
+    header("Location: login.php");
+    exit;
+} 
 
 $blogs = query("SELECT * FROM blogs");
 
@@ -36,14 +27,8 @@ $blogs = query("SELECT * FROM blogs");
             <a href="index.php">Home</a>
             <a href="about.php">About Us</a>
             <a href="contact.php">Contact</a>
-            <?php if( !isset($_SESSION["login"]) ) : ?>
-
-            <?php else : ?>
-                <a href="tambah.php">Buat Blog</a>
-            <?php endif; ?>
-            <?php if( !isset($_SESSION["login"]) ) : ?>
-                <a href="login.php">Login</a>
-            <?php else : ?>
+            <a href="tambah.php?user_id=<?= $userId ?>">Buat Blog</a>
+            <?php if( isset($_SESSION["login"]) ) : ?>
                 <a href="logout.php">Logout</a>
             <?php endif; ?>
         </section>
@@ -58,6 +43,7 @@ $blogs = query("SELECT * FROM blogs");
                 <div class="postTitle">
                     <a href="detail.php?id=<?= $blog["id"] ?>"><?= $blog["judul"]?></a>
                 </div>
+                <p><?= $blog["user_id"]?></p>
                 <div class="postDesc"><?= $blog["deskripsi"] ?></div>
             </section>
             <?php endforeach; ?>
