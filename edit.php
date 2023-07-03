@@ -4,6 +4,12 @@ $userID = $_GET["user_id"];
 
 $blog = query("SELECT * FROM blogs WHERE user_id = $userID")[0];
 
+if(isset($_POST["update"]) ){
+    if( update($_POST, $blog["id"]) > 0 ){
+        header("Location: index.php?id=" . $userID);
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +24,7 @@ $blog = query("SELECT * FROM blogs WHERE user_id = $userID")[0];
         <nav>
             <section class="logo">Blog Php</section>
             <section class="navMenu">
-                <a href="index.php">Home</a>
+                <a href="index.php?id=<?= $userID ?>">Home</a>
                 <a href="about.php">About Us</a>
                 <a href="contact.php">Contact</a>
                 <a href="tambah.php">Buat Blog</a>
@@ -33,7 +39,7 @@ $blog = query("SELECT * FROM blogs WHERE user_id = $userID")[0];
                 <input type="text" name="gambar" id="gambar" value="<?= $blog["gambar"]?>">
                 <label for="deskripsi">Deskripsi Blog : </label>
                 <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" placeholder="Masukan Deskripsi Blog Anda" ><?= $blog["deskripsi"] ?></textarea>
-                <button type="submit" name="create">Buat Blog</button>   
+                <button type="submit" name="update">Buat Blog</button>   
             </form>
         </section>
     </div>

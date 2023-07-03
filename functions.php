@@ -64,6 +64,21 @@ function register($data) {
     return mysqli_affected_rows($conn);
 }
 
+function update($data, $id){
+    global $conn;
 
+    $judul = htmlspecialchars($data["judul"]);
+    $gambar = htmlspecialchars($data["gambar"]);
+    $deskripsi = htmlspecialchars($data["deskripsi"]);
 
+    $query = "UPDATE blogs SET
+                gambar = '$gambar',
+                judul = '$judul',
+                deskripsi = '$deskripsi'
+              WHERE id = $id";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
 ?>
