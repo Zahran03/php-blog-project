@@ -1,12 +1,29 @@
 <?php 
+session_start();
+if( !isset($_SESSION["id"]) ) {
+    header("Location: login.php");
+    exit;
+}
 require "functions.php";
-$userID = $_GET["user_id"];
-
+$userID = $_SESSION["id"];
+echo $userID;
 $blog = query("SELECT * FROM blogs WHERE user_id = $userID")[0];
 
 if(isset($_POST["update"]) ){
-    if( update($_POST, $blog["id"]) > 0 ){
-        header("Location: index.php?id=" . $userID);
+    if( update($_POST, $userID) > 0 ){
+        echo "
+            <script>
+                alert('berhasil edit');
+                document.location.href = 'index.php';
+            </script>
+        ";
+    } else {
+        echo "
+            <script>
+                alert('gagal edit');
+                document.location.href = 'index.php';
+            </script>
+        ";
     }
 }
 
@@ -24,7 +41,7 @@ if(isset($_POST["update"]) ){
         <nav>
             <section class="logo">Blog Php</section>
             <section class="navMenu">
-                <a href="index.php?id=<?= $userID ?>">Home</a>
+                <a href="index.php">Home</a>
                 <a href="about.php">About Us</a>
                 <a href="contact.php">Contact</a>
                 <a href="tambah.php">Buat Blog</a>

@@ -1,14 +1,14 @@
 <?php 
 session_start();
-$user_id = $_GET["user_id"];
+
 require "functions.php";
-if( !isset($_SESSION["login"]) ){
+if( !isset($_SESSION["id"]) ){
     header("Location: login.php");
     exit;
 }
 if( isset( $_POST["create"])){
-    if( tambah($_POST, $user_id) > 0){
-        header("Location: index.php?id=" . $user_id);
+    if( tambah($_POST, $_SESSION["id"]) > 0){
+        header("Location: index.php");
     } else {
         echo "
             <script>

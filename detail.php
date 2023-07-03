@@ -1,9 +1,13 @@
 <?php 
-
+session_start();
+if( !isset($_SESSION["id"]) ) {
+    header("Location: login.php");
+    exit;
+}
 require "functions.php";
 
 // ambil param
-$id = $_GET["id"];
+
 $blog = query("SELECT * FROM blogs WHERE id = $id")[0];
 
 ?>
@@ -34,6 +38,7 @@ $blog = query("SELECT * FROM blogs WHERE id = $id")[0];
             <div class="detailBlog">
                 <h1><?= $blog["judul"] ?></h1>
                 <p><?= $blog["deskripsi"] ?></p>
+                <a href="index.php?id=<?= $blog["user_id"]?>">Kembali Ke Home</a>
             </div>
         </div>
     </section>

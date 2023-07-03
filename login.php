@@ -9,10 +9,9 @@ if( isset($_POST["login"])){
     $result = mysqli_query($conn, "SELECT * FROM pengguna WHERE username = '$username'");
     if( mysqli_num_rows($result) === 1){
         $row = mysqli_fetch_assoc($result);
-        var_dump($row);
         if( password_verify($password, $row["password"])){
-            $_SESSION["login"] = true;
-            header("Location: index.php?id=" . $row['id']);
+            $_SESSION["id"] = $row["id"];
+            header("Location: index.php");
             exit;
         }
     }

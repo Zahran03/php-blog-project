@@ -2,8 +2,7 @@
 session_start();
 
 require "functions.php";
-$userId = $_GET["id"];
-if( !isset($_SESSION["login"]) ){
+if( !isset($_SESSION["id"]) ){
     header("Location: login.php");
     exit;
 } 
@@ -27,7 +26,7 @@ $blogs = query("SELECT * FROM blogs");
             <a href="index.php">Home</a>
             <a href="about.php">About Us</a>
             <a href="contact.php">Contact</a>
-            <a href="tambah.php?user_id=<?= $userId ?>">Buat Blog</a>
+            <a href="tambah.php">Buat Blog</a>
             <?php if( isset($_SESSION["login"]) ) : ?>
                 <a href="logout.php">Logout</a>
             <?php endif; ?>
@@ -43,9 +42,9 @@ $blogs = query("SELECT * FROM blogs");
                 <div class="postTitle">
                     <a href="detail.php?id=<?= $blog["id"] ?>"><?= $blog["judul"]?></a>
                 </div>
-                <?php if($userId === $blog["user_id"]) :?>
+                <?php if( $_SESSION["id"] === $blog["user_id"] ) :?>
                     <div class="deleteAndEdit">
-                        <a class="editButton" href="edit.php?user_id=<?= $blog["user_id"] ?>">Edit</a>
+                        <a class="editButton" href="edit.php">Edit</a>
                         <a class="deleteButton" href="delete.php">Delete</a>
                     </div>
                 <?php endif; ?>

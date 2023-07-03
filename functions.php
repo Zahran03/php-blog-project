@@ -14,16 +14,16 @@ function query($query) {
     return $data;
 }
 
-function tambah($data, $userid){
+function tambah($data, $id ){
     global $conn;
 
     // ambil data user 
-    $userID = $userid;
+    $userID = $id;
     $judul = htmlspecialchars($data["judul"]);
     $gambar = htmlspecialchars($data["gambar"]);
     $deskripsi = htmlspecialchars($data["deskripsi"]);
 
-    mysqli_query($conn, "INSERT INTO blogs VALUES ('',$userID, '$gambar', '$judul', '$deskripsi')");
+    mysqli_query($conn, "INSERT INTO blogs VALUES ('', $userID, '$gambar', '$judul', '$deskripsi')");
 
     return mysqli_affected_rows($conn);
 }
@@ -75,9 +75,17 @@ function update($data, $id){
                 gambar = '$gambar',
                 judul = '$judul',
                 deskripsi = '$deskripsi'
-              WHERE id = $id";
+              WHERE user_id = $id";
 
     mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function hapus($id){
+    global $conn;
+
+    mysqli_query($conn, "DELETE FROM blogs WHERE id = $id");
 
     return mysqli_affected_rows($conn);
 }
