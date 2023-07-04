@@ -20,14 +20,68 @@ function tambah($data, $id ){
     // ambil data user 
     $userID = $id;
     $judul = htmlspecialchars($data["judul"]);
-    $gambar = htmlspecialchars($data["gambar"]);
+    $gambar = upload();
+    if( !$gambar ){
+        return false;
+    }
     $deskripsi = htmlspecialchars($data["deskripsi"]);
 
     mysqli_query($conn, "INSERT INTO blogs VALUES ('', $userID, '$gambar', '$judul', '$deskripsi')");
 
     return mysqli_affected_rows($conn);
 }
+function upload() {
+    $namaFile = $_FILES["gambar"]["name"];
+    $ukuranFile = $_FILES["gambar"]["size"];
+    $error = $_FILES["gambar"]["error"];
+    $tmpName = $_FILES["gambar"]["tmp_name"];
 
+    // cek apakah user mengupload gambar
+    if( $error === 4){
+        echo "
+            <script>
+                alert('Pilih Gambar Telebih Dahulu');
+                document.location.href = 'index.php';
+            </script>
+        ";
+        return false;
+    }
+
+    // cek apakah yang di upload user adalah gambar
+    $ekstensiGambarValid = ["jpg", "png", "jpeg"];
+    $ekstensiGambarUser = explode(".", $namaFile);
+    $ekstensiGambarUser = strtolower(end($ekstensiGambarUser));
+
+    if( !in_array($ekstensiGambarUser, $ekstensiGambarValid)){
+        echo "
+            <script>
+                alert('Maaf Yang Anda Upload Bukan Gambar');
+                document.location.href = 'index.php';
+            </script>
+        ";
+        return false;
+    }
+
+    // cek ukuran file 
+    if( $ukuranFile > 4000000 ){
+        echo "
+            <script>
+                alert('Maaf Ukuran Gambar Minimal 4MB');
+                document.location.href = 'index.php';
+            </script>
+        ";
+        return false;
+    }
+
+    // lolos semua pengecekan 
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= ".";
+    $namaFileBaru .= $ekstensiGambarUser;
+
+    move_uploaded_file($tmpName, "img/" . $namaFileBaru);
+
+    return $namaFileBaru;
+}
 function register($data) {
     global $conn;
 
@@ -68,8 +122,15 @@ function update($data, $id){
     global $conn;
 
     $judul = htmlspecialchars($data["judul"]);
-    $gambar = htmlspecialchars($data["gambar"]);
     $deskripsi = htmlspecialchars($data["deskripsi"]);
+    $gambarLama = htmlspecialchars($data["gambarLama"]);
+
+    // cek apakah user pilih gambar lama atau gambar baru
+    if( $_FILES["gambar"]["error"] === 4 ) {
+        $gambar = $gambarLama;
+    } else {
+        $gambar = upload();
+    }
 
     $query = "UPDATE blogs SET
                 gambar = '$gambar',

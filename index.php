@@ -27,7 +27,7 @@ $blogs = query("SELECT * FROM blogs");
             <a href="about.php">About Us</a>
             <a href="contact.php">Contact</a>
             <a href="tambah.php">Buat Blog</a>
-            <?php if( isset($_SESSION["login"]) ) : ?>
+            <?php if( isset($_SESSION["id"]) ) : ?>
                 <a href="logout.php">Logout</a>
             <?php endif; ?>
         </section>
@@ -45,7 +45,7 @@ $blogs = query("SELECT * FROM blogs");
                 <?php if( $_SESSION["id"] === $blog["user_id"] ) :?>
                     <div class="deleteAndEdit">
                         <a class="editButton" href="edit.php">Edit</a>
-                        <a class="deleteButton" href="delete.php">Delete</a>
+                        <a class="deleteButton" href="delete.php?id=<?= $blog["id"] ?>">Delete</a>
                     </div>
                 <?php endif; ?>
                 <div class="postDesc"><?= $blog["deskripsi"] ?></div>

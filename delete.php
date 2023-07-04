@@ -5,8 +5,8 @@ if( !isset($_SESSION["id"]) ) {
     exit;
 }
 require "functions.php";
-
-if( hapus($_SESSION["id"]) > 0 ){
+$id = $_GET["id"];
+if( hapus($id) > 0 ){
     header("Location: index.php");
 } else {
     echo "

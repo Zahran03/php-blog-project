@@ -6,7 +6,6 @@ if( !isset($_SESSION["id"]) ) {
 }
 require "functions.php";
 $userID = $_SESSION["id"];
-echo $userID;
 $blog = query("SELECT * FROM blogs WHERE user_id = $userID")[0];
 
 if(isset($_POST["update"]) ){
@@ -49,11 +48,12 @@ if(isset($_POST["update"]) ){
         </nav>
     <div class="container">
         <section class="wrapperForm">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="gambarLama"  value="<?= $blog["gambar"] ?>">
                 <label for="judul">Judul : </label>
                 <input type="text" name="judul" id="judul" placeholder="Masukan Judul Blog Anda" value="<?= $blog["judul"]?>">
                 <label for="gambar">Gambar : </label>
-                <input type="text" name="gambar" id="gambar" value="<?= $blog["gambar"]?>">
+                <input type="file" name="gambar" id="gambar">
                 <label for="deskripsi">Deskripsi Blog : </label>
                 <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" placeholder="Masukan Deskripsi Blog Anda" ><?= $blog["deskripsi"] ?></textarea>
                 <button type="submit" name="update">Buat Blog</button>   

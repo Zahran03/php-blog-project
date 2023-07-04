@@ -43,11 +43,11 @@ if( isset( $_POST["create"])){
         </nav>
     <div class="container">
         <section class="wrapperForm">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <label for="judul">Judul : </label>
                 <input type="text" name="judul" id="judul" placeholder="Masukan Judul Blog Anda">
                 <label for="gambar">Gambar : </label>
-                <input type="text" name="gambar" id="gambar">
+                <input type="file" name="gambar" id="gambar">
                 <label for="deskripsi">Deskripsi Blog : </label>
                 <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" placeholder="Masukan Deskripsi Blog Anda"></textarea>
                 <button type="submit" name="create">Buat Blog</button>   
