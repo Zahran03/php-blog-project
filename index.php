@@ -21,7 +21,7 @@ $blogs = query("SELECT * FROM blogs");
 </head>
 <body>
     <nav>
-        <section class="logo">Blog Php</section>
+        <section class="logo">Blogin</section>
         <section class="navMenu">
             <a href="index.php">Home</a>
             <a href="about.php">About Us</a>
