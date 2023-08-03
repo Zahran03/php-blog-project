@@ -56,7 +56,7 @@ if(isset($_POST["update"]) ){
                 <input type="file" name="gambar" id="gambar">
                 <label for="deskripsi">Deskripsi Blog : </label>
                 <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" placeholder="Masukan Deskripsi Blog Anda" ><?= $blog["deskripsi"] ?></textarea>
-                <button type="submit" name="update">Buat Blog</button>   
+                <button type="submit" name="update">Edit Blog</button>   
             </form>
         </section>
     </div>
