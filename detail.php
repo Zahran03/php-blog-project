@@ -19,7 +19,7 @@ $blog = query("SELECT * FROM blogs WHERE id = $id")[0];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Detail</title>
-    <link rel="stylesheet" href="detail.css">
+    <link rel="stylesheet" href="detail.css?version=12345">
 </head>
 <body>
     <nav>

@@ -15,6 +15,8 @@ if( isset($_POST["login"])){
             exit;
         }
     }
+
+    $error = true;
 }
 
 
@@ -26,7 +28,7 @@ if( isset($_POST["login"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="login.css?version=12345">
 </head>
 <body>
     <nav>
@@ -36,7 +38,7 @@ if( isset($_POST["login"])){
             <a href="about.php">About Us</a>
             <a href="contact.php">Contact</a>
             <a href="tambah.php">Buat Blog</a>
-            <a href="login.php">Login</a>
+            <a href="register.php">Register</a>
         </section>
     </nav>
     <div class="container">
