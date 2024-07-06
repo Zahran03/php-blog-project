@@ -38,7 +38,7 @@ if( isset( $_POST["create"])){
                 <a href="about.php">About Us</a>
                 <a href="contact.php">Contact</a>
                 <a href="tambah.php">Buat Blog</a>
-                <a href="login.php">Login</a>
+                <a href="logout.php">Log Out</a>
             </section>
         </nav>
     <div class="container">

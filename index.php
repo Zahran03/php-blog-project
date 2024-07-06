@@ -51,26 +51,27 @@ $blogs = query("SELECT * FROM blogs");
                 </section>
                 <?php endforeach; ?>
             </section>
-        <?php endif; ?>
-        <section class="wrapperCard">
-                <?php foreach( $blogs as $blog ) : ?>
-                <section  class="card">
-                    <div class="imageBlog">
-                        <img src="img/<?= $blog["gambar"] ?>" alt="" height="100">
-                    </div>
-                    <div class="postTitle">
-                        <a href="detail.php?id=<?= $blog["id"] ?>"><?= $blog["judul"]?></a>
-                    </div>
-                    <?php if( $_SESSION["id"] === $blog["user_id"] ) :?>
-                        <div class="deleteAndEdit">
-                            <a class="editButton" href="edit.php">Edit</a>
-                            <a class="deleteButton" href="delete.php?id=<?= $blog["id"] ?>">Delete</a>
+        <?php else : ?>
+            <section class="wrapperCard">
+                    <?php foreach( $blogs as $blog ) : ?>
+                    <section  class="card">
+                        <div class="imageBlog">
+                            <img src="img/<?= $blog["gambar"] ?>" alt="" height="100">
                         </div>
-                    <?php endif; ?>
-                    <div class="postDesc"><?= $blog["deskripsi"] ?></div>
-                </section>
-                <?php endforeach; ?>
+                        <div class="postTitle">
+                            <a href="detail.php?id=<?= $blog["id"] ?>"><?= $blog["judul"]?></a>
+                        </div>
+                        <?php if( $_SESSION["id"] === $blog["user_id"] ) :?>
+                            <div class="deleteAndEdit">
+                                <a class="editButton" href="edit.php">Edit</a>
+                                <a class="deleteButton" href="delete.php?id=<?= $blog["id"] ?>">Delete</a>
+                            </div>
+                        <?php endif; ?>
+                        <div class="postDesc"><?= $blog["deskripsi"] ?></div>
+                    </section>
+                    <?php endforeach; ?>
             </section>
+        <?php endif; ?>
     </section>
 </body>
 </html>

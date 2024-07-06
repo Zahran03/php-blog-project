@@ -36,21 +36,16 @@ nav {
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #4158d0;
-  background-image: linear-gradient(
-    43deg,
-    #4158d0 0%,
-    #c850c0 46%,
-    #ffcc70 100%
-  );
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 .wrapper {
-  background-color: #fff;
+  background-color: cornflowerblue;
   width: 200px;
   text-align: center;
   border-radius: 5px;
@@ -67,13 +62,15 @@ nav {
   background-image: linear-gradient(135deg, #feb692 10%, #ea5455 100%);
 }
 
-/* .formInput form input {
+.formInput form input {
   border: none;
-  border-bottom: 2px solid black;
-} */
+  border-radius: 0.3rem;
+  padding: 0.3rem 3%;
+}
 
 label {
   display: block;
+  text-align: left;
 }
 
 .register {
