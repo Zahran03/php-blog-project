@@ -34,9 +34,15 @@ $blog = query("SELECT * FROM blogs WHERE id = $id")[0];
     </nav>
     <section class="container">
         <div class="wrapperBlog">
-            <img src="img/<?= $blog["gambar"] ?>" alt="">
+            <div class="imageTitle">
+                <div class="image">
+                    <img src="img/<?= $blog["gambar"] ?>" alt="">
+                </div>
+                <div class="title">
+                    <h1><?= $blog["judul"] ?></h1>
+                </div>
+            </div>
             <div class="detailBlog">
-                <h1><?= $blog["judul"] ?></h1>
                 <p><?= $blog["deskripsi"] ?></p>
                 <a href="index.php">Kembali Ke Home</a>
             </div>
